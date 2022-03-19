@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:movieapp/utils/text.dart';
+import 'package:movieapp/widgets/toprated.dart';
+import 'package:movieapp/widgets/trending.dart';
+import 'package:movieapp/widgets/tv.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 
 void main() {
@@ -15,20 +19,7 @@ class MyApp extends StatelessWidget {
       home: Home(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(brightness: Brightness.dark,
-       colorScheme: const ColorScheme(
-         brightness: Brightness.dark,
-         surface: Colors.green,
-         onSurface: Colors.black,
-         // Colors that are not relevant to AppBar in DARK mode:
-         primary: Colors.grey,
-         onPrimary: Colors.grey,
-         secondary: Colors.grey,
-         onSecondary: Colors.grey,
-         background: Colors.grey,
-         onBackground: Colors.grey,
-         error: Colors.grey,
-         onError: Colors.grey,
-       )
+       primaryColor: Colors.black
       ),
     );
   }
@@ -60,24 +51,30 @@ class _HomeState extends State<Home> {
       showLogs: true,
       showErrorLogs: true
     ));
-    Map trendingresult = await tmdbWithCustomLogs.v3.trending.getTrending();
-    Map top_rated_result = await tmdbWithCustomLogs.v3.movies.getTopRated();
-    Map tv_result = await tmdbWithCustomLogs.v3.tv.getPopular();
+    Map trendingResult = await tmdbWithCustomLogs.v3.trending.getTrending();
+    Map topRatedResult = await tmdbWithCustomLogs.v3.movies.getTopRated();
+    Map tvResult = await tmdbWithCustomLogs.v3.tv.getPopular();
     setState(() {
-      trending_movies = trendingresult['results'];
-      top_rated_movies = top_rated_result['results'];
-      tv = tv_result['results'];
+      trending_movies = trendingResult['results'];
+      top_rated_movies = topRatedResult['results'];
+      tv = tvResult['results'];
     });
-    print(trending_movies);
-    print(top_rated_result);
-    print(tv_result);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text("Flutter Movie App"),
+        backgroundColor: Colors.transparent,
+        title: const modifed_text(text: 'Netflix', size: 18,color: Colors.red),
+      ),
+      body: ListView(
+          children: [
+              Popular_Tv(popular_tv: tv ),
+              TreandingMovies(trending: trending_movies),
+              TopRatedMovies(toprated: top_rated_movies),
+          ],
       ),
     );
   }
