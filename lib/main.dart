@@ -37,8 +37,8 @@ class _HomeState extends State<Home> {
   List trending_movies = [];
   List top_rated_movies = [];
   List tv = [];
-  final String api_key = "51ed1e6acb4ce61bd03b29a5b6582cfe";
-  final read_access_token = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MWVkMWU2YWNiNGNlNjFiZDAzYjI5YTViNjU4MmNmZSIsInN1YiI6IjYyMzFhODgxYmVmZDkxMDA3NGM3MTU1ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ijdO48EDP6Gm8rUwVNUpOEbf3CNG4DvcJdaBAOdHDZ4";
+  final String api_key = "";
+  final read_access_token = "";
 
   void initState(){
     loadmovies();
