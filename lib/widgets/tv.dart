@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movieapp/utils/text.dart';
 
+import '../description.dart';
+
 class Popular_Tv extends StatelessWidget {
 
 
@@ -22,7 +24,14 @@ class Popular_Tv extends StatelessWidget {
                 itemBuilder: (context, index){
                   return InkWell(
                     onTap: (){
-
+                      Navigator.push(context,MaterialPageRoute(builder: (context)=>Description(
+                        name: popular_tv[index]['title'],
+                        bannerurl: 'https://image.tmdb.org/t/p/w500'+popular_tv[index]['backdrop_path'],
+                        posterurl: 'https://image.tmdb.org/t/p/w500'+popular_tv[index]['poster_path'],
+                        description: popular_tv[index]['overview'],
+                        vote: popular_tv[index]['vote_average'].toString(),
+                        launch_on: popular_tv[index]['release_date'],
+                      )));
                     },
                     child: Container(
                       
